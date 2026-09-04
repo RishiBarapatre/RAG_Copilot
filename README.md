@@ -34,6 +34,7 @@ It features:
 | 📊 **RAGAS Evaluation** | Faithfulness & Context Precision metrics built-in |
 | 🐍 **Modern FastAPI** | Uses the `lifespan` pattern (no deprecated `@on_event`) |
 | 🔒 **Secure by default** | `.env` excluded from git, `.env.example` provided |
+| 🧪 **Tested** | 15 unit & integration tests across 3 test files |
 
 ---
 
@@ -139,6 +140,18 @@ python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Visit **http://localhost:8000/docs** for the interactive Swagger UI.
+
+### 6. Run the tests
+
+```bash
+# Install dev dependencies (pytest + httpx)
+pip install -r requirements-dev.txt
+
+# Run the full test suite
+python -m pytest tests/ -v
+```
+
+All 15 tests run without a live Groq API key or ChromaDB — everything is mocked.
 
 ---
 
@@ -281,9 +294,21 @@ rag-copilot/
 │       ├── config.py            # LLM + embedding model setup
 │       ├── indexer.py           # Document ingestion pipeline
 │       └── retriever.py         # Query engine + reranker
+├── tests/
+│   ├── conftest.py              # Shared pytest fixtures
+│   ├── test_api.py              # API endpoint tests (6 tests)
+│   ├── test_config.py           # Config unit tests (5 tests)
+│   └── test_retriever.py        # Retriever unit tests (4 tests)
 ├── chroma_db/                   # Local vector database (git-ignored)
 ├── .env.example                 # Environment variable template
-├── environment.yml              # Conda environment spec
+├── .gitignore
+├── .dockerignore
+├── Dockerfile                   # Multi-stage production build
+├── docker-compose.yml           # Docker Compose with persistent volume
+├── environment.yml              # Conda environment (fully pinned)
+├── requirements.txt             # Direct pip dependencies
+├── requirements-dev.txt         # Test dependencies (pytest, httpx)
+├── LICENSE                      # MIT
 └── rag_evaluation_results.csv   # Latest RAGAS scores
 ```
 

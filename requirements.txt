@@ -19,7 +19,7 @@ fastapi==0.141.1
 uvicorn==0.52.1
 
 # MCP Server
-fastmcp
+fastmcp==3.4.7
 
 # Configuration
 python-dotenv==1.2.2
