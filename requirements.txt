@@ -1,0 +1,31 @@
+# Core RAG Framework
+llama-index==0.14.16
+llama-index-core==0.14.23
+llama-index-llms-groq==0.5.0
+llama-index-embeddings-huggingface==0.7.0
+llama-index-vector-stores-chroma==0.5.5
+llama-index-postprocessor-flashrank-rerank==0.2.1
+llama-index-readers-file==0.5.6
+
+# Vector Database
+chromadb==1.5.9
+
+# LLM & Embeddings
+sentence-transformers==5.7.0
+flashrank==0.2.10
+
+# API Server
+fastapi==0.141.1
+uvicorn==0.52.1
+
+# MCP Server
+fastmcp
+
+# Configuration
+python-dotenv==1.2.2
+pydantic-settings==2.15.0
+
+# Evaluation (optional — only needed to run src/evaluate.py)
+ragas
+datasets
+pandas==2.3.3

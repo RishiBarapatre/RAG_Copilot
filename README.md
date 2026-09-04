@@ -97,11 +97,19 @@ git clone https://github.com/YOUR_USERNAME/rag-copilot.git
 cd rag-copilot
 ```
 
-### 2. Create the Conda environment
+### 2. Set up the environment
 
+**Option A — Conda (recommended, fully pinned):**
 ```bash
 conda env create -f environment.yml
 conda activate rag_copilot
+```
+
+**Option B — pip:**
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 ### 3. Configure your API key
@@ -131,6 +139,25 @@ python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Visit **http://localhost:8000/docs** for the interactive Swagger UI.
+
+---
+
+## 🐳 Docker
+
+The fastest way to run the project — no Python environment setup needed.
+
+```bash
+# 1. Add your API key
+cp .env.example .env   # then edit .env with your GROQ_API_KEY
+
+# 2. Build and start
+docker compose up --build
+
+# 3. Run the indexer once to populate the vector database
+docker compose exec api python -c "from src.engine.indexer import build_index; build_index()"
+```
+
+The `chroma_db` is stored in a named Docker volume and persists across container restarts.
 
 ---
 

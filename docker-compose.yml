@@ -1,0 +1,39 @@
+# =============================================================================
+# React RAG Copilot — Docker Compose
+# =============================================================================
+# Usage:
+#   1. Copy .env.example to .env and add your GROQ_API_KEY
+#   2. docker compose up --build
+#   3. Visit http://localhost:8000/docs
+# =============================================================================
+
+services:
+  api:
+    build: .
+    container_name: rag-copilot-api
+    ports:
+      - "8000:8000"
+
+    # Load secrets from your local .env file (never committed to git)
+    env_file:
+      - .env
+
+    # Persist the ChromaDB vector store across container restarts
+    volumes:
+      - chroma_data:/app/chroma_db
+
+    # Restart policy for production-like resilience
+    restart: unless-stopped
+
+    # Human-readable healthcheck status in `docker compose ps`
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+
+# Named volume — ChromaDB data persists even if the container is removed
+volumes:
+  chroma_data:
+    driver: local
