@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import APIRouter, FastAPI, HTTPException
 from pydantic import BaseModel
+from src.engine.config import setup_globals
 from src.engine.retriever import get_query_engine
 
 router = APIRouter()
@@ -20,6 +21,7 @@ class QueryResponse(BaseModel):
 async def lifespan(app: FastAPI):
     """Initialize resources on startup and clean up on shutdown."""
     global query_engine
+    setup_globals()
     try:
         query_engine = get_query_engine()
         print("Query Engine loaded successfully.")

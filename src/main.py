@@ -1,11 +1,9 @@
 from fastapi import FastAPI
 from src.api.routes import router, lifespan
-from src.engine.config import setup_globals
 
-# 1. Setup the global LLM and Embedding models first
-setup_globals()
-
-# 2. Initialize the FastAPI app with the lifespan handler
+# Initialize the FastAPI app — setup_globals() and the query engine are
+# initialized inside the lifespan (see src/api/routes.py), so this module
+# is safe to import without triggering any network or model loading.
 app = FastAPI(
     title="Production RAG API",
     description="A CPU-optimized Retrieval-Augmented Generation API built with LlamaIndex, Groq, and ChromaDB.",
@@ -13,8 +11,9 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# 3. Include our API routes
+# Include our API routes
 app.include_router(router, prefix="/api/v1")
+
 
 if __name__ == "__main__":
     import uvicorn
