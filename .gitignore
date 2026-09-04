@@ -6,9 +6,6 @@
 .env
 *.env
 
-# --- Docker ---
-.dockerignore
-
 # --- Vector Database (persisted locally, not part of source) ---
 chroma_db/
 

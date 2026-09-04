@@ -1,0 +1,24 @@
+# Don't copy secrets or local state into the Docker image
+.env
+chroma_db/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.coverage
+
+# Dev tools
+.venv/
+venv/
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Docs (not needed at runtime)
+README.md
+*.csv
