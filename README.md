@@ -1,4 +1,4 @@
-# ⚛️ React RAG Copilot
+# React RAG Copilot
 
 > A **production-grade, CPU-optimized** Retrieval-Augmented Generation (RAG) system that answers questions about React documentation with cited sources — exposed as both a **REST API** and an **MCP tool** for AI-powered IDEs.
 
@@ -10,7 +10,7 @@
 
 ---
 
-## 🧠 What Is This?
+## What Is This?
 
 Most RAG tutorials stop at "it works on my machine." This project is built around the question: **what does a production-quality RAG pipeline actually look like?**
 
@@ -22,23 +22,23 @@ It features:
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Details |
 |---|---|
-| 🔍 **Two-stage retrieval** | Vector search (top-15) → FlashRank neural reranker (top-3) |
-| 🧩 **MCP Integration** | Works natively in Claude Desktop, Cursor, and any MCP client |
-| 📚 **5 React hooks covered** | `useState`, `useEffect`, `useContext`, `useRef`, `useMemo` |
-| ⚡ **Groq LLM** | Ultra-fast inference via Groq's free tier API |
-| 🗄️ **Local vector DB** | ChromaDB with SQLite — no cloud infra needed |
-| 📊 **RAGAS Evaluation** | Faithfulness & Context Precision metrics built-in |
-| 🐍 **Modern FastAPI** | Uses the `lifespan` pattern (no deprecated `@on_event`) |
-| 🔒 **Secure by default** | `.env` excluded from git, `.env.example` provided |
-| 🧪 **Tested** | 15 unit & integration tests across 3 test files |
+|  **Two-stage retrieval** | Vector search (top-15) → FlashRank neural reranker (top-3) |
+|  **MCP Integration** | Works natively in Claude Desktop, Cursor, and any MCP client |
+|  **5 React hooks covered** | `useState`, `useEffect`, `useContext`, `useRef`, `useMemo` |
+|  **Groq LLM** | Ultra-fast inference via Groq's free tier API |
+|  **Local vector DB** | ChromaDB with SQLite — no cloud infra needed |
+|  **RAGAS Evaluation** | Faithfulness & Context Precision metrics built-in |
+|  **Modern FastAPI** | Uses the `lifespan` pattern (no deprecated `@on_event`) |
+|  **Secure by default** | `.env` excluded from git, `.env.example` provided |
+|  **Tested** | 15 unit & integration tests across 3 test files |
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -78,7 +78,7 @@ It features:
 
 | Layer | Technology | Why |
 |---|---|---|
-| **LLM** | [Groq](https://groq.com) (`gpt-oss-20b`) | Fastest inference on free tier |
+| **LLM** | [Groq](https://groq.com) (`gpt-oss-20b`) | Fast inference on free tier |
 | **Embeddings** | `all-MiniLM-L6-v2` (HuggingFace) | Tiny (80MB), runs on CPU |
 | **Reranker** | FlashRank `ms-marco-TinyBERT-L-2-v2` | CPU neural reranker, massive precision boost |
 | **Vector DB** | [ChromaDB](https://trychroma.com) (persistent) | Local, zero infrastructure |
@@ -89,7 +89,7 @@ It features:
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Clone the repository
 
@@ -155,7 +155,7 @@ All 15 tests run without a live Groq API key or ChromaDB — everything is mocke
 
 ---
 
-## 🐳 Docker
+## Docker
 
 The fastest way to run the project — no Python environment setup needed.
 
@@ -174,7 +174,7 @@ The `chroma_db` is stored in a named Docker volume and persists across container
 
 ---
 
-## 📡 API Usage
+## API Usage
 
 ### `POST /api/v1/ask`
 
@@ -217,7 +217,7 @@ print(response.json()["answer"])
 
 ---
 
-## 🤖 MCP Integration (Claude Desktop / Cursor)
+## MCP Integration (Claude Desktop / Cursor)
 
 This project also runs as a **Model Context Protocol (MCP) server**, letting AI assistants like Claude or Cursor query the React docs directly during conversations.
 
@@ -254,7 +254,7 @@ Once connected, the AI has access to the `query_react_docs` tool and will cite s
 
 ---
 
-## 📊 Evaluation Results
+## Evaluation Results
 
 The pipeline is evaluated using [RAGAS](https://ragas.io) on sample React hook questions:
 
@@ -274,7 +274,7 @@ Results are saved to `rag_evaluation_results.csv`.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 rag-copilot/
@@ -314,7 +314,7 @@ rag-copilot/
 
 ---
 
-## 🔑 Key Design Decisions
+## Key Design Decisions
 
 **Why two-stage retrieval?**
 Simple top-k vector search optimizes for recall, not precision. Adding FlashRank's TinyBERT reranker — which scores full query-document pairs — consistently eliminates irrelevant chunks before they reach the LLM, reducing hallucinations.
@@ -327,13 +327,13 @@ Different consumers have different needs. The REST API is for application integr
 
 ---
 
-## 📄 License
+## License
 
 MIT © 2026
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 - [LlamaIndex](https://llamaindex.ai) for the RAG orchestration framework
 - [Groq](https://groq.com) for blazing-fast LLM inference
